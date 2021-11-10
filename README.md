@@ -277,3 +277,40 @@
         2. 缺点: 缓存问题
     - 字体引入
       @font-face
+
+## Webpack构建优化(未完待续)
+  > convention over configuration
+
+    webpack4.0中的mode
+## 传输加载优化
+  > Gzip压缩(经典好用, 必须会)
+  > Keep Alive
+  > HTTP缓存
+
+    - Cache-Control/Expires
+    - Last-Modified + If-Modified-Since
+    - Etag + If-None-Match
+  > Service Workers
+     
+     - 加速重复访问
+     - 离线支持
+     注意事项: 
+     - 延长了首屏时间, 但总体时间少了
+     - 兼容性
+     - 只能在localhost或https下使用
+  > HTTP/2
+
+    > 现在很多网站已经使用了h2协议, 可以通过network下的protocol查看
+    > http/2优势
+      - 二进制传输
+      - 请求响应多路复用
+      - Server push
+      > 小技巧: thisisunsafe
+    > 只能工作在https下
+    > 适合较高的请求量
+  > 服务端渲染SSR
+
+    基于next.js实现ssr
+    什么时候使用ssr
+      - 架构-大型, 动态页面, 面向公众用户
+      - 搜索引擎排名
