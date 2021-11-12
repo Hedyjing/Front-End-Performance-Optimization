@@ -354,3 +354,40 @@
     - 插件: react-placeholder
     - 怎么查看布局抖动
       chrome-devtools中的layout shift
+
+## 面试指南
+
+  > Web加载&渲染
+
+    1. 从输入URL到页面加载显示完成都发生了什么?
+  1. UI thread会根据输入内容进行判断
+  ![](url.jpg)
+  2. NetWork thread进行DNS解析
+  ![](network.jpg)
+  3. Renderer process
+  ![](render.jpg)
+  ![](render1.jpg)
+
+  > 2.什么是首屏加载, 怎么进行优化
+
+  ![](firstpaint.jpg)  
+    
+    - 资源体积太大
+      - 资源压缩, 传输压缩, 代码拆分, Tree shaking, HTTP/2, 缓存
+    - 首页内容太多
+      - 路由/组件/内容lazy-loading, 预渲染/SSR, Inline CSS
+    - 加载顺序不合适
+      - prefetch, preload
+
+  > 3.JS怎么管理内存? 什么情况会造成内存泄漏
+
+    - 变量创建时自动分配内存, 不使用时"自动"释放内存---GC
+    - 所有的GC都是近似实现, 只能通过判断变量是否还能再次访问到
+    - 局部变量, 函数执行完, 没有闭包引用, 就会被标记回收
+    - 全局变量, 直至浏览器卸载页面时释放
+    - GC实现机制
+      - 引用计数 --- 无法解决循环引用的问题
+      - 标记清除 --- 
+    - 避免意外的全局变量的产生
+    - 避免反复运行引发大量闭包
+    - 避免脱离的DOM元素
