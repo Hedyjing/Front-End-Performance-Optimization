@@ -314,3 +314,43 @@
     什么时候使用ssr
       - 架构-大型, 动态页面, 面向公众用户
       - 搜索引擎排名
+
+## 前沿优化解决方案
+  > 移动端图表 - SVG
+
+  > flex
+
+  > 优化资源加载优先级(预加载)
+    
+    - chrome devtools > priority
+    - html始终最高优先级
+    - 使用preload, prefetch调整优先级
+      - preload: 提前加载较晚出现, 但对当前页面非常重要的资源
+      - `<link rel="preload" href="img/product2.svg" as="image">`
+      - prefetch: 用空闲时间加载后面可能使用要的资源(提前加载后继路由需要的资源, 优先级低)
+    
+  > 预渲染页面
+
+    > 插件: react-snap
+    > 和服务端渲染的区别
+      预渲染是在项目打包的时候就吧页面上的内容都填充好了, 访问的时候相当于会直接返回一个静态页面, 而服务端渲染是在请求的时候服务端进行渲染,再返回
+    - 大型单页性能瓶颈: JS下载+解析+执行
+    - ssr的主要问题: 牺牲TTFB来不就First Paint; 实现复杂
+    - Pre-rendering 打包时提前渲染页面, 没有服务端参与
+
+  > Windowing(窗口化)提高列表性能
+
+    > 插件: react-window
+    > windowing的作用
+      - 加载大列表, 大表单的每一行严重影响性能
+      - Lazy loading仍然会让DOM变得过大
+      - windowing只渲染可见的行, 渲染和滚动的性能都会提升
+
+  > 使用骨架组件减少布局移动(Layout Shift)
+
+    - Skeleton/Placeholder
+      - 占位
+      - 提升用户感知性能
+    - 插件: react-placeholder
+    - 怎么查看布局抖动
+      chrome-devtools中的layout shift
